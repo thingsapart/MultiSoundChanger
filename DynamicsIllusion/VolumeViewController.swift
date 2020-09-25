@@ -37,10 +37,8 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
 
     func toggleMute() {
         muted = !muted
-        let volume: Float = (muted) ? 0.0 : volumeSlider.floatValue / 100
-        for device in selectedDevices! {
-            Audio.setDeviceVolume(deviceID: device, leftChannelLevel: volume, rightChannelLevel: volume)
-        }
+        let volume: Float = (muted) ? 0.0 : volumeSlider.floatValue
+        deviceChangeVolume(value: volume)
     }
 
     func changeStatusItemImage(value: Float) {
@@ -56,7 +54,9 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
         }
     }
 
+    @discardableResult
     func updateVolume(volume: Float) -> Float {
+        if (volume > 0.0) { muted = false }
         volumeSlider.floatValue = max(min(100, volume), 0)
         deviceChangeVolume(value: volumeSlider.floatValue / 100)
         changeStatusItemImage(value: volumeSlider.floatValue)
@@ -73,8 +73,7 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
     }
 
     @IBAction func volumeSliderAction(_ sender: Any) {
-        deviceChangeVolume(value: volumeSlider.floatValue / 100)
-        changeStatusItemImage(value: volumeSlider.floatValue)
+        updateVolume(volume: volumeSlider.floatValue)
     }
 
     @IBAction func balanceSliderAction(_ sender: Any) {
