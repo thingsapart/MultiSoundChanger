@@ -23,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let volumeStep: Float = 100.0 / 16.0
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        UserDefaults.standard.register(defaults: ["balance" : 50.0])
         setupApp()
     }
     
@@ -31,8 +32,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         createMenu()
         
         //Media keys listener
-       self.startMediaKeyOnAccessibiltiyApiChange()
-       self.startMediaKeyTap()
+        self.startMediaKeyOnAccessibiltiyApiChange()
+        self.startMediaKeyTap()
+        
+        // Load last balance setting.
+        volumeViewController?.updateBalance(bal: UserDefaults.standard.float(forKey: "balance"))
     }
     
     func loadViewFromStoryboard(named: String, identifier: String) -> Any {
@@ -80,14 +84,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 item.state = NSControl.StateValue.on
                 if Audio.isAggregateDevice(deviceID: defaultDevice) {
                     volumeViewController?.selectedDevices = Audio.getAggregateDeviceSubDeviceList(deviceID: defaultDevice)
+                    var volume: Float = 0
                     for device in (volumeViewController?.selectedDevices!)! {
                         if Audio.isOutputDevice(deviceID: device) {
-                            let volume = Audio.getDeviceVolume(deviceID: device).first! * 100
-                            volumeViewController?.volumeSlider.floatValue = volume
-                            volumeViewController?.changeStatusItemImage(value: volume)
-                            break
+                            volume = max(volume, Audio.getDeviceVolume(deviceID: device).first! * 100)
                         }
                     }
+                    volumeViewController?.volumeSlider.floatValue = volume
+                    volumeViewController?.changeStatusItemImage(value: volume)
                 } else {
                     volumeViewController?.selectedDevices = [defaultDevice]
                     let volume = Audio.getDeviceVolume(deviceID: defaultDevice).first! * 100
@@ -108,9 +112,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func menuQuitAction() {
         NSApplication.shared.terminate(self)
-        
     }
-    
+
     @objc func menuItemAction(sender: NSMenuItem) {
         for item in (statusItem.menu?.items)! {
             if item == sender {
@@ -129,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-    
+
     @objc func statusBarAction(sender: AnyObject) {
         print("you can update")
     }
@@ -137,11 +140,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         return menuItem.isEnabled
     }
-    
+
     func applicationWillTerminate(_ aNotification: Notification) {
         
     }
-    
+
     //If accessibility api changes, try to start media key listener
     private func startMediaKeyOnAccessibiltiyApiChange() {
         DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: "com.apple.accessibility.api"), object: nil, queue: nil) { _ in

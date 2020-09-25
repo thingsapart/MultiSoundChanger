@@ -66,6 +66,11 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
     func getVolume() -> Float {
         return volumeSlider.floatValue
     }
+    
+    func updateBalance(bal: Float) {
+        balanceSlider.floatValue = bal
+        balance = bal
+    }
 
     @IBAction func volumeSliderAction(_ sender: Any) {
         deviceChangeVolume(value: volumeSlider.floatValue / 100)
@@ -75,6 +80,7 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
     @IBAction func balanceSliderAction(_ sender: Any) {
         balance = balanceSlider.floatValue
         deviceChangeVolume(value: volumeSlider.floatValue / 100)
+        UserDefaults.standard.set(balance, forKey: "balance")
     }
 
     override var representedObject: Any? {
