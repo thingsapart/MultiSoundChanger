@@ -37,7 +37,7 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
 
     func toggleMute() {
         muted = !muted
-        let volume: Float = (muted) ? 0.0 : volumeSlider.floatValue
+        let volume: Float = (muted) ? 0.0 : volumeSlider.floatValue / 100
         deviceChangeVolume(value: volume)
     }
 
