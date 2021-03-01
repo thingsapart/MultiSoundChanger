@@ -23,13 +23,13 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
     func deviceChangeVolume(value: Float) {
         if selectedDevices != nil {
             let balanceMax = (balance < 50.0) ? 100.0 - balance : balance,
-                balanceLeft = balance / balanceMax,
-                balanceRight = (100.0 - balance) / balanceMax,
+                balanceLeft = (100.0 - balance) / balanceMax,
+                balanceRight = balance / balanceMax,
                 count = selectedDevices!.count,
-                balanceDelta = (balanceRight - balanceLeft) / (Float(count) - 1)
+                balanceDelta = balanceRight - balanceLeft
 
             for (index, device) in selectedDevices!.enumerated() {
-                let bal = balanceLeft + balanceDelta * Float(index)
+                let bal = balanceLeft + balanceDelta * Float(index) / Float(count - 1)
                 Audio.setDeviceVolume(deviceID: device, leftChannelLevel: bal * value, rightChannelLevel: bal * value)
             }
         }

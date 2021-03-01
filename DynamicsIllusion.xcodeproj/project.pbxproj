@@ -14,7 +14,7 @@
 		47E683071E91BCA300C525F7 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E683061E91BCA300C525F7 /* Audio.swift */; };
 		47E6830E1E9273EC00C525F7 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6830D1E9273EC00C525F7 /* StringExtensions.swift */; };
 		4A3E4A0275810FCB40991BAE /* Pods_DynamicsIllusion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7BA60D8ECC00E8ABD54AEE0 /* Pods_DynamicsIllusion.framework */; };
-		6985C6FE251951F8003C2FDB /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6985C6FD251951F8003C2FDB /* OSD.framework */; };
+		6942EA7725ED60DD00FA6941 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6942EA7625ED60DD00FA6941 /* OSD.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +26,7 @@
 		4743EFB31E91493B0032F5AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47E683061E91BCA300C525F7 /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Audio.swift; path = Framework/Audio.swift; sourceTree = "<group>"; };
 		47E6830D1E9273EC00C525F7 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensions.swift; path = Extensions/StringExtensions.swift; sourceTree = "<group>"; };
-		6985C6FD251951F8003C2FDB /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
+		6942EA7625ED60DD00FA6941 /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
 		6985C7072519545C003C2FDB /* DynamicsIllusion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DynamicsIllusion-Bridging-Header.h"; sourceTree = "<group>"; };
 		7FCC5AFFBD74FA3C7E36A0F8 /* Pods-DynamicsIllusion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DynamicsIllusion.release.xcconfig"; path = "Target Support Files/Pods-DynamicsIllusion/Pods-DynamicsIllusion.release.xcconfig"; sourceTree = "<group>"; };
 		A7BA60D8ECC00E8ABD54AEE0 /* Pods_DynamicsIllusion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DynamicsIllusion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,7 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A3E4A0275810FCB40991BAE /* Pods_DynamicsIllusion.framework in Frameworks */,
-				6985C6FE251951F8003C2FDB /* OSD.framework in Frameworks */,
+				6942EA7725ED60DD00FA6941 /* OSD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 		83889335DD9089B748A33010 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6985C6FD251951F8003C2FDB /* OSD.framework */,
+				6942EA7625ED60DD00FA6941 /* OSD.framework */,
 				A7BA60D8ECC00E8ABD54AEE0 /* Pods_DynamicsIllusion.framework */,
 			);
 			name = Frameworks;
@@ -288,6 +288,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -302,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -349,6 +350,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -357,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
