@@ -25,11 +25,12 @@ class VolumeViewController: NSViewController, NSTableViewDataSource {
             let balanceMax = (balance < 50.0) ? 100.0 - balance : balance,
                 balanceLeft = (100.0 - balance) / balanceMax,
                 balanceRight = balance / balanceMax,
-                count = selectedDevices!.count,
+                deviceCount = selectedDevices!.count,
+                count = (deviceCount == 1) ? 1 : deviceCount - 1,
                 balanceDelta = balanceRight - balanceLeft
 
             for (index, device) in selectedDevices!.enumerated() {
-                let bal = balanceLeft + balanceDelta * Float(index) / Float(count - 1)
+                let bal = balanceLeft + balanceDelta * Float(index) / Float(count)
                 Audio.setDeviceVolume(deviceID: device, leftChannelLevel: bal * value, rightChannelLevel: bal * value)
             }
         }
